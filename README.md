@@ -8,7 +8,9 @@
 2.Fragment继承BaseDataBindingFragment
 
 3.RecyelerAdapter继承BaseDataBindingRecyclerViewAdapter并在后方加入数据对象
+
 例如:
+
 public class MyAdapter extends BaseDataBindingRecyclerViewAdapter<BaseInfo> {
 		...
 }
