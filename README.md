@@ -1,0 +1,2 @@
+# libs_databinding
+一个基于DataBinding的基础Activity、Fragment、RecyclerAdapter的快捷开发框架
