@@ -11,12 +11,12 @@ import android.view.View;
  * 基于DataBinding的基础Activity
  * Created by wangz on 2018/12/19.
  */
-public abstract class BaseDataBindingActivity extends AppCompatActivity implements View.OnClickListener {
-    private ViewDataBinding baseBinding;
+public abstract class BaseDataBindingActivity<TBinding extends ViewDataBinding> extends AppCompatActivity implements View.OnClickListener {
+    protected TBinding binding;
 
     protected abstract int getLayoutId();
 
-    protected abstract void init(ViewDataBinding baseBinding);
+    protected abstract void init();
 
     protected abstract void initListener();
 
@@ -41,9 +41,9 @@ public abstract class BaseDataBindingActivity extends AppCompatActivity implemen
         if (savedInstanceState != null) {
             onActivityReCreator(savedInstanceState);
         }
-        if (baseBinding == null && setDatabinding())
-            baseBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        init(baseBinding);
+        if (binding == null && setDatabinding())
+            binding = DataBindingUtil.setContentView(this, getLayoutId());
+        init();
         initListener();
     }
 

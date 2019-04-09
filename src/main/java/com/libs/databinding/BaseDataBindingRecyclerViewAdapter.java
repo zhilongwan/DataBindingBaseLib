@@ -18,7 +18,7 @@ import java.util.List;
  * Created by wangz on 2018/9/29.
  */
 
-public abstract class BaseDataBindingRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class BaseDataBindingRecyclerViewAdapter<T,TBinding extends ViewDataBinding> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public List<T> list = new ArrayList<>();
     public Context mContext;
 
@@ -44,13 +44,13 @@ public abstract class BaseDataBindingRecyclerViewAdapter<T> extends RecyclerView
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), getLayout(), parent, false);
+        TBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), getLayout(), parent, false);
         return new ViewHolderItem(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewDataBinding binding = ((ViewHolderItem) holder).getBinding();
+        TBinding binding = ((ViewHolderItem) holder).getBinding();
         onBindView(binding, list.get(position), position);
     }
 
@@ -64,11 +64,11 @@ public abstract class BaseDataBindingRecyclerViewAdapter<T> extends RecyclerView
     /**
      * 数据绑定 对应 onBindViewHolder中的代码
      *
-     * @param dataBinding
+     * @param binding
      * @param bean
      * @param position
      */
-    public abstract void onBindView(ViewDataBinding dataBinding, T bean, int position);
+    public abstract void onBindView(TBinding binding, T bean, int position);
 
     @Override
     public int getItemCount() {
@@ -76,18 +76,18 @@ public abstract class BaseDataBindingRecyclerViewAdapter<T> extends RecyclerView
     }
 
     class ViewHolderItem extends RecyclerView.ViewHolder {
-        private ViewDataBinding binding;
+        private TBinding binding;
 
-        public ViewHolderItem(ViewDataBinding headBinding) {
+        public ViewHolderItem(TBinding headBinding) {
             super(headBinding.getRoot());
             this.binding = headBinding;
         }
 
-        public ViewDataBinding getBinding() {
+        public TBinding getBinding() {
             return binding;
         }
 
-        public void setBinding(ViewDataBinding binding) {
+        public void setBinding(TBinding binding) {
             this.binding = binding;
         }
     }

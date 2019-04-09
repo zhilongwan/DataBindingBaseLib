@@ -15,20 +15,20 @@ import android.view.ViewGroup;
  * 基于DataBinding的基础Fragment
  * Created by wangz on 2018/12/19.
  */
-public abstract class BaseDataBindingFragment extends Fragment {
-    private ViewDataBinding baseBinding;
+public abstract class BaseDataBindingFragment<TBinding extends ViewDataBinding> extends Fragment {
+    protected TBinding binding;
     protected abstract int getLayoutId();
 
-    protected abstract void init(ViewDataBinding baseBinding);
+    protected abstract void init();
     protected abstract void initListener();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (baseBinding == null) {
-            baseBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-            init(baseBinding);
+        if (binding == null) {
+            binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+            init();
             initListener();
         }
-        return baseBinding.getRoot();
+        return binding.getRoot();
     }
 }
