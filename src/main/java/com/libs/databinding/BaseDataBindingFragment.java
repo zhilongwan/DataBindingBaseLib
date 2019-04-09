@@ -10,10 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 /**
  * 基于DataBinding的基础Fragment
- * Created by wangz on 2018/12/19.
+ * @param <TBinding> fragment对应的ViewDataBinding 名称与你的layout.xml命名有关
  */
 public abstract class BaseDataBindingFragment<TBinding extends ViewDataBinding> extends Fragment {
     protected TBinding binding;

@@ -9,7 +9,7 @@ import android.view.View;
 
 /**
  * 基于DataBinding的基础Activity
- * Created by wangz on 2018/12/19.
+ * @param <TBinding> activity对应的ViewDataBinding 名称与你的layout.xml命名有关
  */
 public abstract class BaseDataBindingActivity<TBinding extends ViewDataBinding> extends AppCompatActivity implements View.OnClickListener {
     protected TBinding binding;

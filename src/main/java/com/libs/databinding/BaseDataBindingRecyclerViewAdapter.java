@@ -15,9 +15,9 @@ import java.util.List;
 
 /**
  * 基于DataBinding的基础RecyclerView适配器
- * Created by wangz on 2018/9/29.
+ * @param <T> item对应的数据类型
+ * @param <TBinding> adapter对应的ViewDataBinding 名称与你的layout.xml命名有关
  */
-
 public abstract class BaseDataBindingRecyclerViewAdapter<T,TBinding extends ViewDataBinding> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public List<T> list = new ArrayList<>();
     public Context mContext;
