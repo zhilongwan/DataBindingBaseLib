@@ -11,6 +11,5 @@
 
 例如:
 
-public class MyAdapter extends BaseDataBindingRecyclerViewAdapter<BaseInfo> {
-		...
+public class MyAdapter extends BaseDataBindingRecyclerViewAdapter<MyData> {
 }
