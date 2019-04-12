@@ -3,8 +3,8 @@
 
 使用方法很简单：
 
-1.Activity继承BaseDataBindingActivity
+1.Activity继承BaseDataBindingActivity<T> 泛型参数T为activity对应的ViewDataBinding类型
 
-2.Fragment继承BaseDataBindingFragment
+2.Fragment继承BaseDataBindingFragment<T> 泛型参数T为fragment对应的ViewDataBinding类型
 
-3.RecyelerAdapter继承BaseDataBindingRecyclerViewAdapter并在后方加入数据对象
+3.RecyelerAdapter继承BaseDataBindingRecyclerViewAdapter<T,TBind> 泛型参数T为Adapter数据类型，TBind为A对应的ViewDataBinding类型
