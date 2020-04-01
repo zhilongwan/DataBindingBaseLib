@@ -1,5 +1,6 @@
 package com.libs.databinding
 
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -13,8 +14,7 @@ import android.view.View
  * @param <TBinding> activity对应的ViewDataBinding 名称与你的layout.xml命名有关
 </TBinding> */
 abstract class BaseDataBindingActivity<TBinding : ViewDataBinding> : AppCompatActivity(), View.OnClickListener {
-    var binding: TBinding? = null
-        protected set
+    lateinit var binding: TBinding
 
     protected abstract val layoutId: Int
 
@@ -26,6 +26,8 @@ abstract class BaseDataBindingActivity<TBinding : ViewDataBinding> : AppCompatAc
 
     protected abstract fun initListener()
 
+    protected abstract fun requestInitalData()
+
     abstract fun viewOnClick(v: View)
 
     override fun onClick(v: View) {
@@ -36,15 +38,19 @@ abstract class BaseDataBindingActivity<TBinding : ViewDataBinding> : AppCompatAc
         return true
     }
 
+    override fun getResources(): Resources {
+        return super.getResources()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
             onActivityReCreator(savedInstanceState)
         }
-        if (binding == null && setDatabinding())
+        if (setDatabinding())
             binding = DataBindingUtil.setContentView(this, layoutId)
         init()
         initListener()
+        requestInitalData()
     }
 
     /**
