@@ -16,7 +16,7 @@ import android.view.ViewGroup
 abstract class  BaseDataBindingFragment<TBinding : ViewDataBinding> : Fragment() {
     lateinit var binding: TBinding
     protected abstract val layoutId: Int
-    var isBinding = false
+    private var isBinding = false
 
     protected abstract fun init()
     protected abstract fun initListener()

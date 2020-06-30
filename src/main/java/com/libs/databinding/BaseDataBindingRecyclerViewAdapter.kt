@@ -26,17 +26,17 @@ abstract class BaseDataBindingRecyclerViewAdapter<T, TBinding : ViewDataBinding>
      */
     abstract val layout: Int
 
-    fun setDatas(list: MutableList<T>) {
+    fun setData(list: MutableList<T>) {
         this.list = list
         notifyDataSetChanged()
     }
 
-    fun addDatas(list: MutableList<T>) {
+    fun addData(list: MutableList<T>) {
         this.list!!.addAll(list)
         notifyDataSetChanged()
     }
 
-    fun clearDatas() {
+    fun clearData() {
         this.list!!.clear()
         notifyDataSetChanged()
     }

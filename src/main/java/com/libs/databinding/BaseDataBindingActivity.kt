@@ -1,6 +1,5 @@
 package com.libs.databinding
 
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -22,11 +21,11 @@ abstract class BaseDataBindingActivity<TBinding : ViewDataBinding> : AppCompatAc
 
     var color = -0x1
 
-    protected abstract fun init()
+    protected abstract fun onInit()
 
-    protected abstract fun initListener()
+    protected abstract fun onListenerInit()
 
-    protected abstract fun requestInitalData()
+    protected abstract fun onDataRequest()
 
     abstract fun viewOnClick(v: View)
 
@@ -34,30 +33,11 @@ abstract class BaseDataBindingActivity<TBinding : ViewDataBinding> : AppCompatAc
         viewOnClick(v)
     }
 
-    protected fun setDatabinding(): Boolean {
-        return true
-    }
-
-    override fun getResources(): Resources {
-        return super.getResources()
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState != null) {
-            onActivityReCreator(savedInstanceState)
-        }
-        if (setDatabinding())
-            binding = DataBindingUtil.setContentView(this, layoutId)
-        init()
-        initListener()
-        requestInitalData()
+        binding = DataBindingUtil.setContentView(this, layoutId)
+        onInit()
+        onListenerInit()
+        onDataRequest()
     }
-
-    /**
-     * activity被回收后，重新打开activity需要恢复之前的数据
-     */
-    protected fun onActivityReCreator(savedInstanceState: Bundle) {
-
-    }
-
 }
